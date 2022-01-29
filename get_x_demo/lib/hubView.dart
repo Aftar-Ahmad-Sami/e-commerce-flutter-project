@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
+import 'login_registration/login.dart';
+import 'views/home.dart';
 
 class HubView extends StatefulWidget {
   const HubView({Key? key}) : super(key: key);
@@ -12,14 +13,14 @@ class HubView extends StatefulWidget {
 class _HubViewState extends State<HubView> {
   int _selectedIndex = 0;
   static const List _pages = [
-    Home(),
+    HomeView(),
     //FavouritesView(),
     Icon(
-      Icons.shopping_cart,
+      Icons.favorite_outline,
       size: 150,
     ),
     Icon(
-      Icons.person,
+      Icons.shopping_cart,
       size: 150,
     ),
   ];
@@ -77,10 +78,11 @@ class _HubViewState extends State<HubView> {
               leading: Icon(Icons.logout, color: Colors.redAccent),
               title: Text('Logout'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Login(),
+                    ));
               },
             ),
           ],

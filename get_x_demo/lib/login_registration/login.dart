@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get_x_demo/hubView.dart';
 import 'package:http/http.dart' as http;
 
-import '../home.dart';
 import 'registration.dart';
 
 class Login extends StatefulWidget {

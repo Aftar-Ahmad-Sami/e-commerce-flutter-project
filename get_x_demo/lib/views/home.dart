@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -10,7 +11,12 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   late PageController _pageController;
 
-  List images = ["iphone11.jpg", "sweater.png", "laptop.jpg", "femalewear.png"];
+  final List<String> images = [
+    "iphone11.jpg",
+    "sweater.png",
+    "laptop.jpg",
+    "femalewear.png"
+  ];
 // List images = [
 //     "https://images.samsung.com/bd/smartphones/galaxy-z-fold3-5g/images/galaxy-z-fold3-5g_highlights_kv_img_l.jpg",
 //     "https://images.samsung.com/bd/smartphones/galaxy-z-flip3-5g/images/galaxy-z-flip3-5g_highlights_kv_l.jpg",
@@ -49,31 +55,34 @@ class _HomeViewState extends State<HomeView> {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 200,
-          child: PageView.builder(
-            itemCount: images.length,
-            pageSnapping: true,
-            controller: _pageController,
-            onPageChanged: (page) {
-              setState(() {
-                activePage = page;
-              });
-            },
-            itemBuilder: (context, pagePosition) {
-              return Container(
-                margin: const EdgeInsets.all(5),
-                child: Image.asset(
-                  images[pagePosition],
-                  width: 50,
-                  height: 50,
-                ),
-              );
-            },
-          ),
+          child: Builder(builder: (context) {
+            //  final double height = 200;
+            return CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 0.9,
+                aspectRatio: 2.0,
+                autoPlay: true,
+                enlargeCenterPage: true,
+              ),
+              items: images.map(
+                (url) {
+                  return Container(
+                    //      margin: EdgeInsets.all(0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      child: Image.asset(
+                        url,
+                        fit: BoxFit.cover,
+                        width: 200.0,
+                      ),
+                    ),
+                  );
+                },
+              ).toList(),
+            );
+          }),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: indicators(images.length, activePage),
-        ),
+
         SizedBox(
           height: 100,
           child: ListView.builder(

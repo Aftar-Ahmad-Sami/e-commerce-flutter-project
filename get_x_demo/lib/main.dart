@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_x_demo/hubView.dart';
+import 'package:get_x_demo/splashScreen.dart';
 
 import 'login_registration/login.dart';
 
